@@ -7,7 +7,7 @@ Version:           0.1
 Author:            Andy Fragen
 License:           GNU General Public License v2
 License URI:       http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-GitHub Plugin URI: https://github.com/afragen/los-robles-governance
+GitHub Plugin URI: https://github.com/afragen/losrobles-governance
 GitHub Branch:     master
 Requires WP:       3.8
 Requires PHP:      5.3
