@@ -29,7 +29,7 @@ class Base {
 			);
 
 		add_filter( 'login_redirect', array( $this, 'change_login_redirect' ), 10, 3);
-		add_action( 'init', array( $this, 'add_custom_taxonomies' ), 0 );
+		//add_action( 'init', array( $this, 'add_custom_taxonomies' ), 0 );
 		add_action( 'init', array( $this, 'create_post_type' ) );
 		add_action( 'plugins_loaded', array( $this, 'hide_toolbar' ) );
 
@@ -94,7 +94,7 @@ class Base {
 	 */
 	public function add_custom_taxonomies() {
 		// Add new "Departments" taxonomy to Posts
-		register_taxonomy( 'department', 'drmc_voting', array(
+		register_taxonomy( 'department', 'lrhoa_voting', array(
 			// Hierarchical taxonomy (like categories)
 			'hierarchical' => false,
 			// This array of options controls the labels displayed in the WordPress Admin UI
@@ -122,7 +122,7 @@ class Base {
 	}
 
 	public function create_post_type() {
-		register_post_type( 'drmc_voting',
+		register_post_type( 'lrhoa_voting',
 			array(
 				'labels' => array(
 					'name'          => __( 'Elections' ),
