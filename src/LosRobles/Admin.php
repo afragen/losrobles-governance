@@ -62,7 +62,7 @@ class Admin {
 		if ( ! current_user_can( 'add_users' ) ) { return false; }
 
 		// copy this line for other fields
-		update_user_meta( $user_id, 'drmc_department', $_POST['drmc_department'] );
+		//update_user_meta( $user_id, 'drmc_department', $_POST['drmc_department'] );
 	}
 
 	//http://wordpress.org/support/topic/make-extra-columns-in-userphp-sortable?replies=17#post-2317114
@@ -82,6 +82,7 @@ class Admin {
 	public static function hide_admin_items() { ?>
 		<style type="text/css">.show-admin-bar { display: none; }</style>
 		<style type="text/css">input#eddc_user_paypal.regular-text, input#eddc_user_rate.small-text { display: none; }</style>
+		<style type="text/css">input[id*="email_users_accept_"] { display: none; }</style>
 	<?php }
 
 	public static function edit_admin_menus() {
