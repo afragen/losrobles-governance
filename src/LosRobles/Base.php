@@ -143,14 +143,17 @@ class Base {
 		remove_role( 'non_members' );
 		add_role( 'members', 'Members',
 			array(
-				'read'     => true,
-				'can_vote' => true,
+					'read'                 => true,
+					'can_vote'             => true,
+					'email_single_user'    => true,
+					'email_multiple_users' => true,
+					'email_user_groups'    => true,
 			)
 		);
 		add_role( 'non_members', 'Non-Members',
 			array(
-				'read'     => true,
-				'can_vote' => false,
+					'read'     => true,
+					'can_vote' => false,
 			)
 		);
 	}
@@ -158,6 +161,7 @@ class Base {
 	public function add_admin_voting() {
 		$role = get_role( 'administrator' );
 		$role->add_cap( 'can_vote' );
+		$role->add_cap( 'members' );
 	}
 
 	public static function activate() {
