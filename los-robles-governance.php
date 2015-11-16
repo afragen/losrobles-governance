@@ -41,5 +41,5 @@ function lrhoa_voting_check_shortcode( $attr, $content = null ) {
 }
 
 // secret ballots in wp-polls
-//add_filter( 'poll_log_show_log_filter', '__return_false' );
-//add_filter( 'poll_log_secret_ballot', '__return_empty_string' );
+add_filter( 'poll_log_show_log_filter', '__return_false' );
+add_filter( 'poll_log_secret_ballot', '__return_empty_string' );
