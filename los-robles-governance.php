@@ -3,7 +3,7 @@
 Plugin Name:       Los Robles Governance
 Plugin URI:        https://github.com/afragen/losrobles-governance
 Description:       This plugin adds registration, custom user meta and other things to the Los Robles HOA website for web-based governance.
-Version:           0.1
+Version:           0.1.1
 Author:            Andy Fragen
 License:           GNU General Public License v2
 License URI:       http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
