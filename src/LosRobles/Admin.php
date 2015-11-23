@@ -24,7 +24,14 @@ class Admin {
 		add_action( 'admin_print_styles-user-edit.php', array( $this, 'hide_admin_items' ) );
 
 		add_action( 'admin_menu', array( $this, 'edit_admin_menus' ) );
-}
+
+		// Force Strong Password plugin -- all users
+		if ( function_exists( 'slt_fsp_init' ) ) {
+			//plugin is activated
+			add_filter( 'slt_fsp_caps_check', '__return_empty_array' );
+		}
+
+	}
 
 
 	public static function remove_contactmethods( $user_contactmethods ) {
