@@ -27,14 +27,17 @@ class Admin {
 	}
 
 	public function show_extra_profile_fields( $user ) {
+		$username      = $user->get( 'user_login' );
+		$street_number = explode( '-', $username );
+		$street_number = array_shift( $street_number );
+
 		?>
 			<h3><?php _e( 'Los Robles HOA Info' ); ?></h3>
 			<table class="form-table">
 				<tr>
 					<th><label for='street_number' id='street_number'><?php _e( 'Los Robles Street Number' ); ?></label></th>
 					<td>
-						<input class="lrhoa-setting" type="text" id="lrhoa_street_number" name="lrhoa_street_number" value="<?php esc_attr_e( $user->get( 'lrhoa_street_number' ) ); ?>">
-						<p class='description'><?php _e( 'Los Robles street number' ); ?></p>
+						<?php esc_attr_e( $street_number ); ?>
 					</td>
 				</tr>
 				<tr>
