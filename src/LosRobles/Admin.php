@@ -2,90 +2,76 @@
 
 namespace Fragen\LosRobles;
 
-add_filter( 'user_contactmethods', 'Fragen\\LosRobles\\Admin::remove_contactmethods', 100 );
-
-//add columns to User panel list page
-//add_action( 'manage_users_custom_column', 'Fragen\\LosRobles\\Admin::add_custom_user_columns', 15, 3 );
-//add_filter( 'manage_users_columns', 'Fragen\\LosRobles\\Admin::add_user_columns', 15, 1 );
-
 class Admin {
-
 	public function __construct() {
-
-		// Add additional custom fields to profile page
-		// http://pastebin.com/0zhWAtqY
-		//add_action ( 'show_user_profile', array( $this, 'wpq_show_extra_profile_fields' ) );
-		//add_action ( 'edit_user_profile', array( $this, 'wpq_show_extra_profile_fields' ) );
-
-		// Save data input from custom field on profile page
-		//add_action( 'personal_options_update', array( $this, 'wpq_save_extra_profile_fields' ) );
-		//add_action( 'edit_user_profile_update', array( $this, 'wpq_save_extra_profile_fields' ) );
-		add_action( 'admin_print_scripts-profile.php', array( $this, 'hide_admin_items' ) );
-		add_action( 'admin_print_styles-user-edit.php', array( $this, 'hide_admin_items' ) );
-
-		add_action( 'admin_menu', array( $this, 'edit_admin_menus' ) );
-
 		// Force Strong Password plugin -- all users
 		if ( function_exists( 'slt_fsp_init' ) ) {
-			//plugin is activated
+			// plugin is activated
 			add_filter( 'slt_fsp_caps_check', '__return_empty_array' );
 		}
-
 	}
 
+	public function load_hooks() {
+		// Add additional custom fields to profile page
+		// http://pastebin.com/0zhWAtqY
+		add_action( 'show_user_profile', [ $this, 'show_extra_profile_fields' ] );
+		add_action( 'edit_user_profile', [ $this, 'show_extra_profile_fields' ] );
 
-	public static function remove_contactmethods( $user_contactmethods ) {
-		// You can get rid of ones you don't want
-		unset( $user_contactmethods['jabber'] );
-		unset( $user_contactmethods['yim'] );
-		unset( $user_contactmethods['aim'] );
+		// Save data input from custom field on profile page
+		add_action( 'personal_options_update', [ $this, 'save_extra_profile_fields' ] );
+		add_action( 'edit_user_profile_update', [ $this, 'save_extra_profile_fields' ] );
+		// add_action( 'admin_print_scripts-profile.php', [ $this, 'hide_admin_items' ] );
+		// add_action( 'admin_print_styles-user-edit.php', [ $this, 'hide_admin_items' ] );
 
-		//Added by WordPress SEO
-		unset( $user_contactmethods['googleplus'] );
-		unset( $user_contactmethods['twitter'] );
-		unset( $user_contactmethods['facebook'] );
-
-		return $user_contactmethods;
+		add_action( 'admin_menu', [ $this, 'edit_admin_menus' ] );
 	}
 
-
-	public static function wpq_show_extra_profile_fields( $user ) {
+	public function show_extra_profile_fields( $user ) {
 		?>
-			<h3><?php _e( 'Extra Profile Info'); ?></h3>
+			<h3><?php _e( 'Los Robles HOA Info' ); ?></h3>
 			<table class="form-table">
 				<tr>
-					<th><label for="drmc_department" id="drmc_department"><?php _e( 'Department' ); ?></label></th>
+					<th><label for='street_number' id='street_number'><?php _e( 'Los Robles Street Number' ); ?></label></th>
 					<td>
-						<?php Base::make_dropdown( $user ); ?>
+						<input class="lrhoa-setting" type="text" id="lrhoa_street_number" name="lrhoa_street_number" value="<?php esc_attr_e( $user->get( 'lrhoa_street_number' ) ); ?>">
+						<p class='description'><?php _e( 'Los Robles street number' ); ?></p>
 					</td>
 				</tr>
+				<tr>
+					<th><label for='phone_number' id='phone_number'><?php _e( 'Los Robles Phone Number' ); ?></label></th>
+					<td>
+						<input class="lrhoa-setting" type="text" id="lrhoa_phone_number" name="lrhoa_phone_number" value="<?php esc_attr_e( $user->get( 'lrhoa_phone_number' ) ); ?>">
+						<p class='description'><?php _e( 'Local phone number' ); ?></p>
+					</td>
+				</tr>
+				<tr>
+					<th><label for='emergency_number' id='emergency_number'><?php _e( 'Emergency Contact Number' ); ?></label></th>
+					<td>
+						<input class="lrhoa-setting" type="text" id="lrhoa_emergency_number" name="lrhoa_emergency_number" value="<?php esc_attr_e( $user->get( 'lrhoa_emergency_number' ) ); ?>">
+						<p class='description'><?php _e( 'Emergency contact phone number' ); ?></p>
+					</td>
+				</tr>
+
 			</table>
 		<?php
 	}
 
+	public function save_extra_profile_fields( $user_id ) {
+		if ( ! current_user_can( 'add_users' ) ) {
+			return false;
+		}
 
-	public static function wpq_save_extra_profile_fields( $user_id ) {
-		if ( ! current_user_can( 'add_users' ) ) { return false; }
+		$phone_number     = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
+		$emergency_number = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
 
 		// copy this line for other fields
-		//update_user_meta( $user_id, 'drmc_department', $_POST['drmc_department'] );
+		update_user_meta( $user_id, 'lrhoa_street_number', $_POST['lrhoa_street_number'] );
+		update_user_meta( $user_id, 'lrhoa_phone_number', $phone_number );
+		update_user_meta( $user_id, 'lrhoa_emergency_number', $emergency_number );
 	}
 
-	//http://wordpress.org/support/topic/make-extra-columns-in-userphp-sortable?replies=17#post-2317114
-	public function add_user_columns( $defaults ) {
-		$defaults['drmc_department'] = 'Department';
-
-		return $defaults;
-	}
-
-	public static function add_custom_user_columns( $value, $column_name, $id ) {
-		if ( 'drmc_department' == $column_name ) {
-			return get_the_author_meta( 'drmc_department', $id );
-		}
-	}
-
-	//hide toolbar option in profile - http://digwp.com/2011/04/admin-bar-tricks/
-	public static function hide_admin_items() {
+	// hide toolbar option in profile - http://digwp.com/2011/04/admin-bar-tricks/
+	public function hide_admin_items() {
 		if ( ! current_user_can( 'add_users' ) ) {
 			?>
 			<style type="text/css">
@@ -98,18 +84,17 @@ class Admin {
 		}
 	}
 
-	public static function edit_admin_menus() {
+	public function edit_admin_menus() {
 		remove_menu_page( 'link-manager.php' );
 		if ( ! current_user_can( 'add_users' ) ) {
 			remove_menu_page( 'tools.php' );
 			remove_menu_page( 'edit-comments.php' );
 			remove_menu_page( 'edit.php?post_type=feedback' );
 			remove_menu_page( 'options-general.php' );
-			//remove_menu_page( 'edit.php?post_type=drmc_voting' );
+			// remove_menu_page( 'edit.php?post_type=drmc_voting' );
 		}
-		if ( ! current_user_can( 'publish_posts' ) ) {
-			remove_menu_page( 'edit.php?post_type=tribe_events' );
-		}
+		// if ( ! current_user_can( 'publish_posts' ) ) {
+		// remove_menu_page( 'edit.php?post_type=tribe_events' );
+		// }
 	}
-
 }
