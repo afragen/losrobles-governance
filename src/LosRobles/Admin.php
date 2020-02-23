@@ -37,7 +37,8 @@ class Admin {
 				<tr>
 					<th><label for='street_number' id='street_number'><?php _e( 'Los Robles Street Number' ); ?></label></th>
 					<td>
-						<?php esc_attr_e( $street_number ); ?>
+						<input class="lrhoa-setting" type="text" id="lrhoa_street_number" name="lrhoa_street_number" disabled="disabled" value="<?php esc_attr_e( $street_number ); ?>">
+						<p class='description'><?php _e( 'Los Robles street number' ); ?></p>
 					</td>
 				</tr>
 				<tr>
