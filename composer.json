@@ -1,0 +1,35 @@
+{
+    "name": "afragen/losrobles-governance",
+    "description": "Places development notice for plugins or themes that are in local development. Prevents updating of selected plugins and themes. Allows for using a local file server.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Fragen",
+            "email": "andy@thefragens.com",
+            "homepage": "https://thefragens.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/afragen/losrobles-governance"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fragen\\LosRobles\\": "src/LosRobles/"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "wp i18n make-pot . languages/losrobles-governance.pot"
+        ]
+    }
+}
