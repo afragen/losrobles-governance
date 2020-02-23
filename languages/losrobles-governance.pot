@@ -1,0 +1,31 @@
+# Copyright (C) 2020 Andy Fragen
+# This file is distributed under the same license as the Los Robles Governance plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Los Robles Governance 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/losrobles-governance\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-02-23T23:41:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: losrobles-governance\n"
+
+#. Plugin Name of the plugin
+msgid "Los Robles Governance"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/afragen/losrobles-governance"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin adds registration, custom user meta and other things to the Los Robles HOA website for web-based governance."
+msgstr ""
+
+#. Author of the plugin
+msgid "Andy Fragen"
+msgstr ""
