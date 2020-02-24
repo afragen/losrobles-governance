@@ -3,13 +3,6 @@
 namespace Fragen\LosRobles;
 
 class Admin {
-	public function __construct() {
-		// Force Strong Password plugin -- all users
-		if ( function_exists( 'slt_fsp_init' ) ) {
-			// plugin is activated
-			add_filter( 'slt_fsp_caps_check', '__return_empty_array' );
-		}
-	}
 
 	public function load_hooks() {
 		// Add additional custom fields to profile page

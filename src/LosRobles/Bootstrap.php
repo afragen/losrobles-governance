@@ -13,7 +13,7 @@ class Bootstrap {
 		);
 
 		$this->init_voting();
-		( new Base() )::instance()->load_hooks();
+		( new Base() )->load_hooks();
 	}
 
 	public function add_user_roles() {

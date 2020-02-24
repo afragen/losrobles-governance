@@ -6,26 +6,18 @@ class Base {
 	public static $depts;
 	private static $object = false;
 
-	public static function instance() {
-		if ( false === self::$object ) {
-			self::$object = new self();
-		}
-
-		return self::$object;
-	}
-
-	public function __construct() {
-	}
-
 	public function load_hooks() {
 		add_filter( 'login_redirect', [ $this, 'change_login_redirect' ], 10, 3 );
 		// add_action( 'init', array( $this, 'add_custom_taxonomies' ), 0 );
 		add_action( 'init', [ $this, 'create_post_type' ] );
 		add_action( 'plugins_loaded', [ $this, 'hide_toolbar' ] );
 
-		if ( is_admin() ) {
-			( new Admin( $this ) )->load_hooks();
-		}
+		add_action(
+			'admin_init',
+			function() {
+				( new Admin( $this ) )->load_hooks();
+			}
+		);
 	}
 
 	// http://nathany.com/redirecting-wordpress-subscribers
