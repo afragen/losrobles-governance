@@ -58,11 +58,12 @@ class Admin {
 			return false;
 		}
 
+		$street_number    = isset( $_POST['lrhoa_street_number'] ) ? $_POST['lrhoa_street_number'] : '0000';
 		$phone_number     = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
 		$emergency_number = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
 
 		// copy this line for other fields
-		update_user_meta( $user_id, 'lrhoa_street_number', $_POST['lrhoa_street_number'] );
+		update_user_meta( $user_id, 'lrhoa_street_number', $street_number );
 		update_user_meta( $user_id, 'lrhoa_phone_number', $phone_number );
 		update_user_meta( $user_id, 'lrhoa_emergency_number', $emergency_number );
 	}
