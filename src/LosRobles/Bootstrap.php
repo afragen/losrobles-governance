@@ -3,9 +3,15 @@
 namespace Fragen\LosRobles;
 
 class Bootstrap {
+	public $file;
+
+	public function __construct( $file ) {
+		$this->file = $file;
+	}
 	public function run() {
+		\error_log('Bootstrap::run');
 		register_activation_hook(
-			__FILE__,
+			$this->file,
 			function () {
 				$this->add_user_roles();
 				$this->add_admin_voting();
@@ -17,6 +23,7 @@ class Bootstrap {
 	}
 
 	public function add_user_roles() {
+		error_log( 'Bootstrap::add_user_roles' );
 		$roles = new WP_Roles();
 		$roles->remove_role( 'members' );
 		$roles->remove_role( 'non_members' );
