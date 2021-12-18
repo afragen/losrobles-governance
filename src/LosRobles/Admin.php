@@ -59,8 +59,8 @@ class Admin {
 		}
 
 		$street_number    = isset( $_POST['lrhoa_street_number'] ) ? $_POST['lrhoa_street_number'] : '0000';
-		$phone_number     = preg_replace( '/^\+\d(\d{3})(\d{3})(\d{4})$/', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
-		$emergency_number = preg_replace( '/^\+\d(\d{3})(\d{3})(\d{4})$/', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
+		$phone_number     = preg_replace( '#\(?(\d{0,3})\)?\s?(\d{3})-?(\d{4})#', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
+		$emergency_number = preg_replace( '#\(?(\d{0,3})\)?\s?(\d{3})-?(\d{4})#', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
 
 		// copy this line for other fields
 		update_user_meta( $user_id, 'lrhoa_street_number', $street_number );
