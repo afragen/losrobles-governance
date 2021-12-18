@@ -25,6 +25,7 @@ class Bootstrap {
 			[
 				'read'                 => true,
 				'can_vote'             => true,
+				'edit_lrhoa_fields'    => true,
 				'email_single_user'    => true,
 				'email_multiple_users' => true,
 				'email_user_groups'    => true,

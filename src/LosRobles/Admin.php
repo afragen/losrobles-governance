@@ -54,7 +54,7 @@ class Admin {
 	}
 
 	public function save_extra_profile_fields( $user_id ) {
-		if ( ! current_user_can( 'add_users' ) ) {
+		if ( ! current_user_can( 'edit_lrhoa_fields' ) ) {
 			return false;
 		}
 
