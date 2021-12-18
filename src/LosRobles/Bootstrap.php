@@ -17,8 +17,9 @@ class Bootstrap {
 	}
 
 	public function add_user_roles() {
-		remove_role( 'members' );
-		remove_role( 'non_members' );
+		$roles = new WP_Roles();
+		$roles->remove_role( 'members' );
+		$roles->remove_role( 'non_members' );
 		add_role(
 			'members',
 			'Members',
