@@ -27,7 +27,7 @@ class Bootstrap {
 		$roles = new \WP_Roles();
 		$roles->remove_role( 'members' );
 		$roles->remove_role( 'non_members' );
-		add_role(
+		$roles->add_role(
 			'members',
 			'Members',
 			[
@@ -39,7 +39,7 @@ class Bootstrap {
 				'email_user_groups'    => true,
 			]
 		);
-		add_role(
+		$roles->add_role(
 			'non_members',
 			'Non-Members',
 			[
