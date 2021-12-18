@@ -54,13 +54,13 @@ class Admin {
 	}
 
 	public function save_extra_profile_fields( $user_id ) {
-		if ( ! current_user_can( 'add_users' ) ) {
+		if ( ! current_user_can( 'edit_lrhoa_fields' ) ) {
 			return false;
 		}
 
 		$street_number    = isset( $_POST['lrhoa_street_number'] ) ? $_POST['lrhoa_street_number'] : '0000';
-		$phone_number     = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
-		$emergency_number = preg_replace( '/([0-9]{3})([0-9]{3})([0-9]{4})/', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
+		$phone_number     = preg_replace( '#\(?(\d{0,3})\)?\s?(\d{3})-?(\d{4})#', '($1) $2-$3', $_POST['lrhoa_phone_number'] );
+		$emergency_number = preg_replace( '#\(?(\d{0,3})\)?\s?(\d{3})-?(\d{4})#', '($1) $2-$3', $_POST['lrhoa_emergency_number'] );
 
 		// copy this line for other fields
 		update_user_meta( $user_id, 'lrhoa_street_number', $street_number );
