@@ -1,4 +1,7 @@
+[unreleased]
 * fix to allow members to edit Los Robles data
+* improved handling of US phone numbers
+
 #### 1.0.0
 * refactor and general cleanup
 * add custom user fields for street number, phone number, and emergency contact
