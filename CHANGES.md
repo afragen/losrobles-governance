@@ -1,4 +1,6 @@
 [unreleased]
+
+#### 1.1.0 / 2021-12-18
 * fix to allow members to edit Los Robles data
 * improved handling of US phone numbers
 
