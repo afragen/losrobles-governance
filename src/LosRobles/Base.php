@@ -23,7 +23,7 @@ class Base {
 	// http://nathany.com/redirecting-wordpress-subscribers
 	public function change_login_redirect( $redirect_to, $request_redirect_to, $user ) {
 		if ( $user instanceof \WP_User && false === $user->has_cap( 'add_users' ) ) {
-			return get_bloginfo( 'siteurl' );
+			return get_bloginfo( 'url' );
 		}
 
 		return $redirect_to;
