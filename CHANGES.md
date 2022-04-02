@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.1.1 / 2022-04-02
+* update deprecated `get_bloginfo('siteurl')` to `get_bloginfo('url')`
+
 #### 1.1.0 / 2021-12-18
 * fix to allow members to edit Los Robles data
 * improved handling of US phone numbers
