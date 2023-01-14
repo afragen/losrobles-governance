@@ -5,7 +5,7 @@ namespace Fragen\LosRobles;
 class Bootstrap {
 	public function run() {
 		$this->add_user_roles();
-		$this->add_admin_voting();
+		$this->add_extra_admin_caps();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -14,6 +14,7 @@ class Bootstrap {
 		$roles = new \WP_Roles();
 		$roles->remove_role( 'members' );
 		$roles->remove_role( 'non_members' );
+		$roles->remove_role( 'board_member' );
 		$roles->add_role(
 			'members',
 			'Members',
@@ -34,12 +35,25 @@ class Bootstrap {
 				'can_vote' => false,
 			]
 		);
+		$roles->add_role(
+			'board_member',
+			'Board Member',
+			[
+				'read'                 => true,
+				'can_vote'             => true,
+				'edit_lrhoa_fields'    => true,
+				'email_single_user'    => true,
+				'email_multiple_users' => true,
+				'email_user_groups'    => true,
+			]
+		);
 	}
 
-	public function add_admin_voting() {
+	public function add_extra_admin_caps() {
 		$role = get_role( 'administrator' );
 		$role->add_cap( 'can_vote' );
 		$role->add_cap( 'edit_lrhoa_fields' );
+		$role->add_cap( 'board_member' );
 	}
 
 	public function init_voting() {

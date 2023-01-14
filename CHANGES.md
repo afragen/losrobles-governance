@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.2.0 / 2023-01-14
+* add board_member capability
+
 #### 1.1.1 / 2022-04-02
 * update deprecated `get_bloginfo('siteurl')` to `get_bloginfo('url')`
 
