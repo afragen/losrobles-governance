@@ -38,15 +38,10 @@ class Bootstrap {
 		$roles->add_role(
 			'board_member',
 			'Board Member',
-			[
-				'read'                 => true,
-				'can_vote'             => true,
-				'edit_lrhoa_fields'    => true,
-				'email_single_user'    => true,
-				'email_multiple_users' => true,
-				'email_user_groups'    => true,
-			]
+			[]
 		);
+		$board_member = get_role( 'board_member' );
+		$board_member->add_cap( 'members' );
 	}
 
 	public function add_extra_admin_caps() {
