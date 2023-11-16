@@ -14,7 +14,7 @@ class Base {
 
 		add_action(
 			'admin_init',
-			function() {
+			function () {
 				( new Admin( $this ) )->load_hooks();
 			}
 		);

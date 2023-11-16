@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.2.1 / 2023-11-15
+* improved board_member caps
+
 #### 1.2.0 / 2023-01-14
 * add board_member capability
 
