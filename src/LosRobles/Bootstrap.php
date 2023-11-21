@@ -6,6 +6,7 @@ class Bootstrap {
 	public function run() {
 		$this->add_user_roles();
 		$this->add_extra_admin_caps();
+		$this->add_caps_board_member();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -40,18 +41,21 @@ class Bootstrap {
 			'Board Member',
 			[]
 		);
-		$board_member = get_role( 'board_member' );
-		$board_member->add_cap( 'members' );
 	}
 
-	public function add_extra_admin_caps() {
+	private function add_extra_admin_caps() {
 		$role = get_role( 'administrator' );
-		$role->add_cap( 'can_vote' );
 		$role->add_cap( 'edit_lrhoa_fields' );
+		$role->add_cap( 'members' );
 		$role->add_cap( 'board_member' );
 	}
 
-	public function init_voting() {
+	private function add_caps_board_member() {
+		$role = get_role( 'board_member' );
+		$role->add_cap( 'members' );
+	}
+
+	private function init_voting() {
 		// add shortcode for [voting]
 		add_shortcode( 'voting', 'lrhoa_voting_check_shortcode' );
 		function lrhoa_voting_check_shortcode( $attr, $content = null ) {
