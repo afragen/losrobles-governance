@@ -43,19 +43,19 @@ class Bootstrap {
 		);
 	}
 
-	public function add_extra_admin_caps() {
+	private function add_extra_admin_caps() {
 		$role = get_role( 'administrator' );
 		$role->add_cap( 'edit_lrhoa_fields' );
 		$role->add_cap( 'members' );
 		$role->add_cap( 'board_member' );
 	}
 
-	public function add_caps_board_member() {
+	private function add_caps_board_member() {
 		$role = get_role( 'board_member' );
 		$role->add_cap( 'members' );
 	}
 
-	public function init_voting() {
+	private function init_voting() {
 		// add shortcode for [voting]
 		add_shortcode( 'voting', 'lrhoa_voting_check_shortcode' );
 		function lrhoa_voting_check_shortcode( $attr, $content = null ) {

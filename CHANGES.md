@@ -1,4 +1,6 @@
 [unreleased]
+* add board_member caps in function
+* change scope to private for setting caps
 
 #### 1.2.1 / 2023-11-15
 * improved board_member caps
