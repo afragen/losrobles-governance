@@ -23,6 +23,7 @@ class Admin {
 		$username      = $user->get( 'user_login' );
 		$street_number = explode( '-', $username );
 		$street_number = array_shift( $street_number );
+		$street_number = preg_replace( '/[a-z]/', '', $street_number );
 
 		?>
 			<h3><?php _e( 'Los Robles HOA Info' ); ?></h3>

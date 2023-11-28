@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.2.4 / 2023-11-28
+* fix street number in profile
+
 #### 1.2.3 / 2023-11-27
 * load in plugins_loaded
 
