@@ -15,4 +15,10 @@ namespace Fragen\LosRobles;
 
 // Load Autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
-( new Bootstrap() )->run();
+
+add_action(
+	'plugins_loaded',
+	function () {
+		( new Bootstrap() )->run();
+	}
+);
