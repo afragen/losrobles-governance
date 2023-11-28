@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.2.3 / 2023-11-27
+* load in plugins_loaded
+
 #### 1.2.2 / 2023-11-21
 * add board_member caps in function
 * change scope to private for setting caps
