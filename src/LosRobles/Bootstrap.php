@@ -65,7 +65,7 @@ class Bootstrap {
 
 	private function add_caps_member_noprivs() {
 		$role = get_role( 'member_noprivs' );
-		$role->add_cap( 'non-members' );
+		$role->add_cap( 'non_members' );
 	}
 
 	private function init_voting() {
