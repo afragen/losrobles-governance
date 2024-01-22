@@ -1,7 +1,7 @@
 [unreleased]
 
 #### 1.2.5 / 2024-01-22
-* add dog_house role
+* add member_noprivs role
 
 #### 1.2.4 / 2023-11-28
 * fix street number in profile
