@@ -3,10 +3,12 @@
 namespace Fragen\LosRobles;
 
 class Bootstrap {
+
 	public function run() {
 		$this->add_user_roles();
 		$this->add_extra_admin_caps();
 		$this->add_caps_board_member();
+		$this->add_caps_dog_house();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -16,30 +18,36 @@ class Bootstrap {
 		$roles->remove_role( 'members' );
 		$roles->remove_role( 'non_members' );
 		$roles->remove_role( 'board_member' );
+		$roles->remove_role( 'dog_house' );
 		$roles->add_role(
 			'members',
 			'Members',
-			[
+			array(
 				'read'                 => true,
 				'can_vote'             => true,
 				'edit_lrhoa_fields'    => true,
 				'email_single_user'    => true,
 				'email_multiple_users' => true,
 				'email_user_groups'    => true,
-			]
+			)
 		);
 		$roles->add_role(
 			'non_members',
 			'Non-Members',
-			[
+			array(
 				'read'     => true,
 				'can_vote' => false,
-			]
+			)
 		);
 		$roles->add_role(
 			'board_member',
 			'Board Member',
-			[]
+			array()
+		);
+		$roles->add_role(
+			'dog_house',
+			'Dog House',
+			array()
 		);
 	}
 
@@ -55,11 +63,16 @@ class Bootstrap {
 		$role->add_cap( 'members' );
 	}
 
+	private function add_caps_dog_house() {
+		$role = get_role( 'dog_house' );
+		$role->add_cap( 'non-members' );
+	}
+
 	private function init_voting() {
 		// add shortcode for [voting]
 		add_shortcode( 'voting', 'lrhoa_voting_check_shortcode' );
 		function lrhoa_voting_check_shortcode( $attr, $content = null ) {
-			$atts = shortcode_atts( [ 'capability' => 'can_vote' ], $attr, 'voting' );
+			$atts = shortcode_atts( array( 'capability' => 'can_vote' ), $attr, 'voting' );
 			if ( current_user_can( $atts['capability'] ) && ! is_null( $content ) && ! is_feed() ) {
 				return do_shortcode( $content );
 			}
