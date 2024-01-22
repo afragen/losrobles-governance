@@ -8,7 +8,7 @@ class Bootstrap {
 		$this->add_user_roles();
 		$this->add_extra_admin_caps();
 		$this->add_caps_board_member();
-		$this->add_caps_dog_house();
+		$this->add_caps_member_noprivs();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -18,7 +18,7 @@ class Bootstrap {
 		$roles->remove_role( 'members' );
 		$roles->remove_role( 'non_members' );
 		$roles->remove_role( 'board_member' );
-		$roles->remove_role( 'dog_house' );
+		$roles->remove_role( 'member_noprivs' );
 		$roles->add_role(
 			'members',
 			'Members',
@@ -45,8 +45,8 @@ class Bootstrap {
 			array()
 		);
 		$roles->add_role(
-			'dog_house',
-			'Dog House',
+			'member_noprivs',
+			'Member No Privileges',
 			array()
 		);
 	}
@@ -63,8 +63,8 @@ class Bootstrap {
 		$role->add_cap( 'members' );
 	}
 
-	private function add_caps_dog_house() {
-		$role = get_role( 'dog_house' );
+	private function add_caps_member_noprivs() {
+		$role = get_role( 'member_noprivs' );
 		$role->add_cap( 'non-members' );
 	}
 
