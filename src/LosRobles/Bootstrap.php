@@ -65,7 +65,7 @@ class Bootstrap {
 
 	private function add_caps_dog_house() {
 		$role = get_role( 'dog_house' );
-		$role->add_caps( 'non-members' );
+		$role->add_cap( 'non-members' );
 	}
 
 	private function init_voting() {
