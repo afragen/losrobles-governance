@@ -8,6 +8,7 @@ class Bootstrap {
 		$this->add_user_roles();
 		$this->add_extra_admin_caps();
 		$this->add_caps_board_member();
+		$this->add_caps_dog_house();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -60,6 +61,11 @@ class Bootstrap {
 	private function add_caps_board_member() {
 		$role = get_role( 'board_member' );
 		$role->add_cap( 'members' );
+	}
+
+	private function add_caps_dog_house() {
+		$role = get_role( 'dog_house' );
+		$role->add_caps( 'non-members' );
 	}
 
 	private function init_voting() {
