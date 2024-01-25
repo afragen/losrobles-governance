@@ -1,5 +1,8 @@
 [unreleased]
 
+#### 1.2.6 / 2024-01-25
+* fix PHP Fatal error Uncaught Error: Call to a member function add_cap() on null
+
 #### 1.2.5 / 2024-01-22
 * add member_noprivs role
 
