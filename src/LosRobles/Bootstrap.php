@@ -53,6 +53,15 @@ class Bootstrap {
 
 	private function add_extra_admin_caps() {
 		$role = get_role( 'administrator' );
+		if ( is_null( $role ) ) {
+			// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+			if ( ! function_exists( 'populate_roles' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/schema.php';
+			}
+
+			populate_roles();
+			$role = get_role( 'administrator' );
+		}
 		$role->add_cap( 'edit_lrhoa_fields' );
 		$role->add_cap( 'members' );
 		$role->add_cap( 'board_member' );
