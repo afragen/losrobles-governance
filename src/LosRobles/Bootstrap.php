@@ -52,6 +52,12 @@ class Bootstrap {
 	}
 
 	private function add_extra_admin_caps() {
+		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+		if ( is_null( get_role( 'administrator' ) ) && ! function_exists( 'populate_roles' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/schema.php';
+			populate_roles();
+		}
+
 		$role = get_role( 'administrator' );
 		$role->add_cap( 'edit_lrhoa_fields' );
 		$role->add_cap( 'members' );
@@ -59,11 +65,23 @@ class Bootstrap {
 	}
 
 	private function add_caps_board_member() {
+		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+		if ( is_null( get_role( 'board_member' ) ) && ! function_exists( 'populate_roles' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/schema.php';
+			populate_roles();
+		}
+
 		$role = get_role( 'board_member' );
 		$role->add_cap( 'members' );
 	}
 
 	private function add_caps_member_noprivs() {
+		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+		if ( is_null( get_role( 'member_noprivs' ) ) && ! function_exists( 'populate_roles' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/schema.php';
+			populate_roles();
+		}
+
 		$role = get_role( 'member_noprivs' );
 		$role->add_cap( 'non_members' );
 	}
