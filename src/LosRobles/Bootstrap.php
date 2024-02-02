@@ -71,6 +71,12 @@ class Bootstrap {
 		$role->add_cap( 'non_members' );
 	}
 
+	// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+	private function populate_roles() {
+		require_once ABSPATH . 'wp-admin/includes/schema.php';
+		populate_roles();
+	}
+
 	private function init_voting() {
 		// add shortcode for [voting]
 		add_shortcode( 'voting', 'lrhoa_voting_check_shortcode' );
@@ -86,11 +92,5 @@ class Bootstrap {
 		// secret ballots in wp-polls
 		add_filter( 'poll_log_show_log_filter', '__return_false' );
 		add_filter( 'poll_log_secret_ballot', '__return_empty_string' );
-	}
-
-	// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
-	private function populate_roles() {
-		require_once ABSPATH . 'wp-admin/includes/schema.php';
-		populate_roles();
 	}
 }
