@@ -1,5 +1,5 @@
 [unreleased]
-* move fix for add_cap() to load action
+* move fix for add_cap() to method
 
 #### 1.2.6 / 2024-01-25
 * fix PHP Fatal error Uncaught Error: Call to a member function add_cap() on null

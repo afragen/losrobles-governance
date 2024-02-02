@@ -52,12 +52,7 @@ class Bootstrap {
 	}
 
 	private function add_extra_admin_caps() {
-		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
-		if ( is_null( get_role( 'administrator' ) ) && ! function_exists( 'populate_roles' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/schema.php';
-			populate_roles();
-		}
-
+		$this->fix_add_caps_is_null( 'administrator' );
 		$role = get_role( 'administrator' );
 		$role->add_cap( 'edit_lrhoa_fields' );
 		$role->add_cap( 'members' );
@@ -65,23 +60,13 @@ class Bootstrap {
 	}
 
 	private function add_caps_board_member() {
-		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
-		if ( is_null( get_role( 'board_member' ) ) && ! function_exists( 'populate_roles' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/schema.php';
-			populate_roles();
-		}
-
+		$this->fix_add_caps_is_null( 'board_member' );
 		$role = get_role( 'board_member' );
 		$role->add_cap( 'members' );
 	}
 
 	private function add_caps_member_noprivs() {
-		// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
-		if ( is_null( get_role( 'member_noprivs' ) ) && ! function_exists( 'populate_roles' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/schema.php';
-			populate_roles();
-		}
-
+		$this->fix_add_caps_is_null( 'member_noprivs' );
 		$role = get_role( 'member_noprivs' );
 		$role->add_cap( 'non_members' );
 	}
@@ -101,5 +86,13 @@ class Bootstrap {
 		// secret ballots in wp-polls
 		add_filter( 'poll_log_show_log_filter', '__return_false' );
 		add_filter( 'poll_log_secret_ballot', '__return_empty_string' );
+	}
+
+	// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
+	private function fix_add_caps_is_null( $role ) {
+		if ( is_null( get_role( $role ) ) ) {
+			require_once ABSPATH . 'wp-admin/includes/schema.php';
+			populate_roles();
+		}
 	}
 }
