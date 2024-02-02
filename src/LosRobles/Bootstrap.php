@@ -7,8 +7,8 @@ class Bootstrap {
 	public function run() {
 		$this->add_user_roles();
 		$this->add_extra_admin_caps();
-		$this->add_caps_board_member();
-		$this->add_caps_member_noprivs();
+		//$this->add_caps_board_member();
+		//$this->add_caps_member_noprivs();
 		$this->init_voting();
 		( new Base() )->load_hooks();
 	}
@@ -42,12 +42,22 @@ class Bootstrap {
 		$roles->add_role(
 			'board_member',
 			'Board Member',
-			array()
+			array(
+				'read'                 => true,
+				'can_vote'             => true,
+				'edit_lrhoa_fields'    => true,
+				'email_single_user'    => true,
+				'email_multiple_users' => true,
+				'email_user_groups'    => true,
+			)
 		);
 		$roles->add_role(
 			'member_noprivs',
 			'Member No Privileges',
-			array()
+			array(
+				'read'     => true,
+				'can_vote' => false,
+			)
 		);
 	}
 
