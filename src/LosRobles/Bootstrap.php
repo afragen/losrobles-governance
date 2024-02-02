@@ -52,29 +52,32 @@ class Bootstrap {
 	}
 
 	private function add_extra_admin_caps() {
-		$this->populate_roles();
-		$role = get_role( 'administrator' );
+		$role = $this->get_role('administrator');
+		//$role = get_role( 'administrator' );
 		$role->add_cap( 'edit_lrhoa_fields' );
 		$role->add_cap( 'members' );
 		$role->add_cap( 'board_member' );
 	}
 
 	private function add_caps_board_member() {
-		$this->populate_roles();
-		$role = get_role( 'board_member' );
+		$role = $this->get_role('board_member');
+		//$role = get_role( 'board_member' );
 		$role->add_cap( 'members' );
 	}
 
 	private function add_caps_member_noprivs() {
-		$this->populate_roles();
-		$role = get_role( 'member_noprivs' );
+		$role = $this->get_role('member_noprives');
+		//$role = get_role( 'member_noprivs' );
 		$role->add_cap( 'non_members' );
 	}
 
 	// Fixes PHP Fatal error Uncaught Error: Call to a member function add_cap() on null.
-	private function populate_roles() {
+	private function get_role($role) {
+		if ( is_null(get_role($role))){
 		require_once ABSPATH . 'wp-admin/includes/schema.php';
 		populate_roles();
+		}
+		return get_role($role);
 	}
 
 	private function init_voting() {
