@@ -1,4 +1,5 @@
 [unreleased]
+* check for `WP_Role` instance in `Bootstrap`
 
 #### 1.2.7 / 2024-02-02
 * refactor to avoid add_cap() on null error
