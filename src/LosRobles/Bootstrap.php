@@ -52,26 +52,26 @@ class Bootstrap {
 	}
 
 	private function add_extra_admin_caps() {
-		if ( is_null( get_role( 'administrator' ) ) ) {
-			require_once ABSPATH . 'wp-admin/includes/schema.php';
-			populate_roles();
-		}
 		$role = get_role( 'administrator' );
-		$role->add_cap( 'edit_lrhoa_fields' );
-		$role->add_cap( 'members' );
-		$role->add_cap( 'board_member' );
+		if ( $role instanceof \WP_Role ) {
+			$role->add_cap( 'edit_lrhoa_fields' );
+			$role->add_cap( 'members' );
+			$role->add_cap( 'board_member' );
+		}
 	}
 
 	private function add_caps_board_member() {
-		$this->add_user_roles();
 		$role = get_role( 'board_member' );
-		$role->add_cap( 'members' );
+		if ( $role instanceof \WP_Role ) {
+			$role->add_cap( 'members' );
+		}
 	}
 
 	private function add_caps_member_noprivs() {
-		$this->add_user_roles();
 		$role = get_role( 'member_noprivs' );
-		$role->add_cap( 'non_members' );
+		if ( $role instanceof \WP_Role ) {
+			$role->add_cap( 'non_members' );
+		}
 	}
 
 	private function init_voting() {
